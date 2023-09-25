@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JGuevaraExamenTecnicoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Artista">
+    <Key>
+      <PropertyRef Name="IdArtista" />
+    </Key>
+    <Property Name="IdArtista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Disco">
+    <Key>
+      <PropertyRef Name="IdDisco" />
+    </Key>
+    <Property Name="IdDisco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titulo" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Duracion" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Anio" Type="date" Nullable="false" />
+    <Property Name="Ventas" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Disponibilidad" Type="bit" />
+    <Property Name="IdArtista" Type="int" />
+    <Property Name="IdGenero" Type="int" />
+    <Property Name="IdDistribuidora" Type="int" />
+  </EntityType>
+  <EntityType Name="Distribuidora">
+    <Key>
+      <PropertyRef Name="IdDistribuidora" />
+    </Key>
+    <Property Name="IdDistribuidora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeneroMusical">
+    <Key>
+      <PropertyRef Name="IdGenero" />
+    </Key>
+    <Property Name="IdGenero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Disco__IdArtista__5535A963">
+    <End Role="Artista" Type="Self.Artista" Multiplicity="0..1" />
+    <End Role="Disco" Type="Self.Disco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artista">
+        <PropertyRef Name="IdArtista" />
+      </Principal>
+      <Dependent Role="Disco">
+        <PropertyRef Name="IdArtista" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Disco__IdDistrib__571DF1D5">
+    <End Role="Distribuidora" Type="Self.Distribuidora" Multiplicity="0..1" />
+    <End Role="Disco" Type="Self.Disco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distribuidora">
+        <PropertyRef Name="IdDistribuidora" />
+      </Principal>
+      <Dependent Role="Disco">
+        <PropertyRef Name="IdDistribuidora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Disco__IdGenero__5629CD9C">
+    <End Role="GeneroMusical" Type="Self.GeneroMusical" Multiplicity="0..1" />
+    <End Role="Disco" Type="Self.Disco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GeneroMusical">
+        <PropertyRef Name="IdGenero" />
+      </Principal>
+      <Dependent Role="Disco">
+        <PropertyRef Name="IdGenero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ArtistaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ArtistaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdArtista" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ArtistaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="ArtistaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdArtista" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ArtistaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdArtista" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DiscoAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Titulo" Type="varchar" Mode="In" />
+    <Parameter Name="Duracion" Type="varchar" Mode="In" />
+    <Parameter Name="Anio" Type="date" Mode="In" />
+    <Parameter Name="Ventas" Type="decimal" Mode="In" />
+    <Parameter Name="IdArtista" Type="int" Mode="In" />
+    <Parameter Name="IdGenero" Type="int" Mode="In" />
+    <Parameter Name="IdDistribuidora" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DiscoDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdDisco" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DiscoGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DiscoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idDisco" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DiscoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdDisco" Type="int" Mode="In" />
+    <Parameter Name="Titulo" Type="varchar" Mode="In" />
+    <Parameter Name="Duracion" Type="varchar" Mode="In" />
+    <Parameter Name="Anio" Type="date" Mode="In" />
+    <Parameter Name="Ventas" Type="decimal" Mode="In" />
+    <Parameter Name="Disponibilidad" Type="bit" Mode="In" />
+    <Parameter Name="IdArtista" Type="int" Mode="In" />
+    <Parameter Name="IdGenero" Type="int" Mode="In" />
+    <Parameter Name="IdDistribuidora" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DistribuidoraAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DistribuidoraDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdDistribuidora" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DistribuidoraGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DistribuidoraGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdDistribuidora" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DistribuidoraUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdDistribuidora" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GeneroMusicalGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="JGuevaraExamenTecnicoModelStoreContainer">
+    <EntitySet Name="Artista" EntityType="Self.Artista" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Disco" EntityType="Self.Disco" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Distribuidora" EntityType="Self.Distribuidora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GeneroMusical" EntityType="Self.GeneroMusical" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Disco__IdArtista__5535A963" Association="Self.FK__Disco__IdArtista__5535A963">
+      <End Role="Artista" EntitySet="Artista" />
+      <End Role="Disco" EntitySet="Disco" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Disco__IdDistrib__571DF1D5" Association="Self.FK__Disco__IdDistrib__571DF1D5">
+      <End Role="Distribuidora" EntitySet="Distribuidora" />
+      <End Role="Disco" EntitySet="Disco" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Disco__IdGenero__5629CD9C" Association="Self.FK__Disco__IdGenero__5629CD9C">
+      <End Role="GeneroMusical" EntitySet="GeneroMusical" />
+      <End Role="Disco" EntitySet="Disco" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

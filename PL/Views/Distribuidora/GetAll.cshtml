@@ -1,0 +1,45 @@
+﻿@model ML.Distribuidora
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center mb-2">Distribuidoras</h1>
+@if (Model.Distribuidoras != null)
+{
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr class="text-center">
+                <th>Editar</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Distribuidora distribuidora in Model.Distribuidoras)
+            {
+                <tr class="text-center">
+                    <td><a href="@Url.Action("Form", "Distribuidora", new {idDistribuidora = distribuidora.IdDistribuidora})"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #000000;"></i></a></td>
+                    <td>@distribuidora.Nombre</td>
+                    <td>@distribuidora.Direccion</td>
+                    <td>@distribuidora.Email</td>
+                    <td>@distribuidora.Telefono</td>
+
+                    <td><a href="@Url.Action("Delete", "Distribuidora", new {idDistribuidora = distribuidora.IdDistribuidora})"><i class="fa-solid fa-trash-can fa-xl" style="color: #121212;"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 class="text-center text-danger">No hay Distribuidoras</h3>
+}
+
+<div class="text-center">
+    <a href="@Url.Action("Form", "Distribuidora")" class="btn btn-success">Agregar Distribuidora</a>
+</div>

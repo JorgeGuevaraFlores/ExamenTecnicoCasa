@@ -1,0 +1,43 @@
+﻿@model ML.Artista
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center mb-2">Artistas</h1>
+@if (Model.Artistas != null)
+{
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr class="text-center">
+                <th>Editar</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Artista artista in Model.Artistas)
+            {
+                <tr class="text-center">
+                    <td><a href="@Url.Action("Form", "Artista", new {idArtista = artista.IdArtista})"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #E57500; "></i></a></td>
+                    <td>@artista.Nombre</td>
+                    <td>@artista.ApellidoPaterno</td>
+                    <td>@artista.ApellidoMaterno</td>
+
+                    <td><a href="@Url.Action("Delete", "Artista", new {idArtista = artista.IdArtista})"><i class="fa-solid fa-trash-can fa-xl" style="color: #FF000C;"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hay Artistas</p>
+}
+
+<div class="text-center">
+    <a href="@Url.Action("Form", "Artista")" class="btn btn-success">Agregar Artista</a>
+</div>

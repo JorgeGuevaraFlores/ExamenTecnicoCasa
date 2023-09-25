@@ -1,0 +1,43 @@
+﻿@model ML.Artista
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">Formulario Artista</h1>
+<hr />
+@using (Html.BeginForm("Form", "Artista", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center mt-2" }))
+{
+    @Html.HiddenFor(model => model.IdArtista)
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Nombre)</label>
+                    @Html.TextBoxFor(model => model.Nombre)
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.ApellidoPaterno)</label>
+                    @Html.TextBoxFor(model => model.ApellidoPaterno)
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.ApellidoMaterno)</label>
+                    @Html.TextBoxFor(model => model.ApellidoMaterno)
+                </div>
+
+            </div>
+
+        </div>
+        <div class="text-center mt-2">
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+    </div>
+
+
+}
+
+

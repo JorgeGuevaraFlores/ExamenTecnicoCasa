@@ -1,0 +1,51 @@
+﻿@model ML.Disco
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-2">Discos</h1>
+@if (Model.Discos != null)
+{
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr class="text-center">
+                <th>Disponibilidad</th>
+                <th>Nombre Disco</th>
+                <th>Artista</th>
+                <th>Año lanzamiento</th>
+                <th>Duración</th>
+                <th>Género Musical</th>
+                <th>Ventas</th>
+                <th>Distribuidora</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Disco disco in Model.Discos)
+            {
+                <tr class="text-center">
+                    <td>@disco.Disponibilidad</td>
+                    <td>@disco.Titulo</td>
+                    <td>@disco.Artista.Nombre @disco.Artista.ApellidoPaterno @disco.Artista.ApellidoMaterno</td>
+                    <td>@String.Format("{0:yyyy}", @disco.Anio)</td>
+                    <td>@disco.Duracion</td>
+                    <td>@disco.GeneroMusical.Nombre</td>
+                    <td>$ @disco.Ventas</td>
+                    <td>@disco.Distribuidora.Nombre</td>
+                    <td><a href="@Url.Action("Form", "Disco", new {idDisco = disco.IdDisco})"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #000000;"></i></a></td>
+                    <td><a href="@Url.Action("Delete", "Disco", new {idDisco = disco.IdDisco})"><i class="fa-solid fa-trash-can fa-xl" style="color: #121212;"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>no hay discos</p>
+}
+
+<div class="text-center">
+    <a href="@Url.Action("Form", "Disco")" class="btn btn-success">Agregar Disco</a>
+</div>

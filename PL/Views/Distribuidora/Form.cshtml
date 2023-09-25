@@ -1,0 +1,48 @@
+﻿@model ML.Distribuidora
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">Formulario Distribuidora</h1>
+<hr />
+@using (Html.BeginForm("Form", "Distribuidora", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center mt-2" }))
+{
+    @Html.HiddenFor(model => model.IdDistribuidora)
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Nombre)</label>
+                    @Html.TextBoxFor(model => model.Nombre)
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Direccion)</label>
+                    @Html.TextBoxFor(model => model.Direccion)
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Email)</label>
+                    @Html.TextBoxFor(model => model.Email)
+                </div>
+
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Telefono)</label>
+                    @Html.TextBoxFor(model => model.Telefono)
+                </div>
+
+            </div>
+
+        </div>
+        <div class="text-center mt-2">
+            <button type="submit" class="btn btn-success">Guardar Distribuidora</button>
+        </div>
+    </div>
+
+
+}
+

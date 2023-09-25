@@ -1,0 +1,60 @@
+﻿@model ML.Disco
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Formulario Disco</h1>
+<hr />
+@using (Html.BeginForm("Form", "Disco", FormMethod.Post, new { enctype = "multipart/form-data", @class = "text-center mt-2" }))
+{
+    @Html.HiddenFor(model => model.IdDisco)
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-6">
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Titulo)</label>
+                    @Html.TextBoxFor(model => model.Titulo)
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Duracion)</label>
+                    @Html.TextBoxFor(model => model.Duracion)
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">Año</label>
+                    @Html.TextBoxFor(model => model.Anio, "{0:yyyy}")
+                </div>
+
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.LabelFor(model => model.Ventas)</label>
+                    @Html.TextBoxFor(model => model.Ventas)
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.DropDownListFor(model => model.Artista.IdArtista, new SelectList(Model.Artista.Artistas, "IdArtista", "Nombre"), "Selecciona un Artista ", new { @class = "form-control" })</label>
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.DropDownListFor(model => model.GeneroMusical.IdGenero, new SelectList(Model.GeneroMusical.Generos, "IdGenero", "Nombre"), "Selecciona un Genero ", new { @class = "form-control" })</label>
+                </div>
+
+                <div class="mb-2">
+                    <label class="d-block text-center">@Html.DropDownListFor(model => model.Distribuidora.IdDistribuidora, new SelectList(Model.Distribuidora.Distribuidoras, "IdDistribuidora", "Nombre"), "Selecciona una Distrobuidora", new { @class = "form-control" })</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="text-center mt-2">
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+    </div>
+
+
+}
